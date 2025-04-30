@@ -1,0 +1,3 @@
+rootProject.name = 'java-aws-sqs-sns'
+
+include 'order-service'
