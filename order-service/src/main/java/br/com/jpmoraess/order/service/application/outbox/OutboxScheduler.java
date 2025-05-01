@@ -26,7 +26,7 @@ public class OutboxScheduler {
     @Scheduled(fixedDelayString = "${outbox-scheduler.fixed-delay}",
             initialDelayString = "${outbox-scheduler.initial-delay}")
     public void processOutboxMessages() {
-        outboxEventRepository.findByStatus("STARTED")
+        outboxEventRepository.findByStatus(OutboxStatus.STARTED.name())
                 .forEach(outboxEvent -> outboxEventPublisher.publish(outboxEvent, this::updateOutboxStatus));
     }
 
