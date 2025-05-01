@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 import java.util.function.BiConsumer;
 
 @Component
-public class OutboxEventSnsPublisher implements OutboxEventPublisher {
+public class OutboxEventSQSPublisher implements OutboxEventPublisher {
 
-    private static final Logger logger = LoggerFactory.getLogger(OutboxEventSnsPublisher.class);
+    private static final Logger logger = LoggerFactory.getLogger(OutboxEventSQSPublisher.class);
 
     @Override
     public void publish(OutboxEvent outboxEvent, BiConsumer<OutboxEvent, OutboxStatus> callback) {
-        logger.info("Publishing outbox event to SNS: {}", outboxEvent);
+        logger.info("Publishing outbox event to SQS: {}", outboxEvent);
         callback.accept(outboxEvent, OutboxStatus.COMPLETED);
     }
 }
