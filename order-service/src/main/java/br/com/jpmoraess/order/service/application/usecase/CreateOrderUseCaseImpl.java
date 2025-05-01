@@ -1,22 +1,19 @@
 package br.com.jpmoraess.order.service.application.usecase;
 
 import br.com.jpmoraess.order.service.application.outbox.OutboxEvent;
+import br.com.jpmoraess.order.service.application.ports.input.CreateOrderUseCase;
 import br.com.jpmoraess.order.service.application.ports.output.repository.OrderRepository;
 import br.com.jpmoraess.order.service.application.ports.output.repository.OutboxEventRepository;
 import br.com.jpmoraess.order.service.domain.entity.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.UUID;
+@Service
+public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
 
-@Component
-public class CreateOrderUseCase {
-
-    private static final Logger logger = LoggerFactory.getLogger(CreateOrderUseCase.class);
+    private static final Logger logger = LoggerFactory.getLogger(CreateOrderUseCaseImpl.class);
 
     private static final String ORDER = "Order";
     private static final String ORDER_CREATED = "OrderCreated";
@@ -24,11 +21,12 @@ public class CreateOrderUseCase {
     private final OrderRepository orderRepository;
     private final OutboxEventRepository outboxEventRepository;
 
-    public CreateOrderUseCase(OrderRepository orderRepository, OutboxEventRepository outboxEventRepository) {
+    public CreateOrderUseCaseImpl(OrderRepository orderRepository, OutboxEventRepository outboxEventRepository) {
         this.orderRepository = orderRepository;
         this.outboxEventRepository = outboxEventRepository;
     }
 
+    @Override
     @Transactional
     public CreateOrderOutput execute(CreateOrderInput input) {
         logger.info("Creating order for customer: {}", input.customerId());
@@ -41,17 +39,5 @@ public class CreateOrderUseCase {
 
         logger.info("Order created: {}", order);
         return CreateOrderOutput.of(order.getId(), order.getCustomerId(), order.getProducts(), order.getTotal());
-    }
-
-    public record CreateOrderInput(UUID customerId, List<UUID> products) {
-        public static CreateOrderInput of(UUID customerId, List<UUID> products) {
-            return new CreateOrderInput(customerId, products);
-        }
-    }
-
-    public record CreateOrderOutput(UUID id, UUID customerId, List<UUID> products, BigDecimal total) {
-        public static CreateOrderOutput of(UUID id, UUID customerId, List<UUID> products, BigDecimal total) {
-            return new CreateOrderOutput(id, customerId, products, total);
-        }
     }
 }

@@ -2,7 +2,7 @@ package br.com.jpmoraess.order.service.api;
 
 import br.com.jpmoraess.order.service.api.request.CreateOrderRequest;
 import br.com.jpmoraess.order.service.api.response.CreateOrderResponse;
-import br.com.jpmoraess.order.service.application.usecase.CreateOrderUseCase;
+import br.com.jpmoraess.order.service.application.ports.input.CreateOrderUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
