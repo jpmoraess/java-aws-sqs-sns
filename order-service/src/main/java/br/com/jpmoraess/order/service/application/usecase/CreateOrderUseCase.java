@@ -40,12 +40,18 @@ public class CreateOrderUseCase {
         outboxEventRepository.save(outboxEvent);
 
         logger.info("Order created: {}", order);
-        return new CreateOrderOutput(order.getId(), order.getCustomerId(), order.getProducts(), order.getTotal());
+        return CreateOrderOutput.of(order.getId(), order.getCustomerId(), order.getProducts(), order.getTotal());
     }
 
     public record CreateOrderInput(UUID customerId, List<UUID> products) {
+        public static CreateOrderInput of(UUID customerId, List<UUID> products) {
+            return new CreateOrderInput(customerId, products);
+        }
     }
 
     public record CreateOrderOutput(UUID id, UUID customerId, List<UUID> products, BigDecimal total) {
+        public static CreateOrderOutput of(UUID id, UUID customerId, List<UUID> products, BigDecimal total) {
+            return new CreateOrderOutput(id, customerId, products, total);
+        }
     }
 }
