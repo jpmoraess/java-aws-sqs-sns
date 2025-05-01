@@ -30,7 +30,7 @@ public class OutboxScheduler {
                 .forEach(outboxEvent -> outboxEventPublisher.publish(outboxEvent, this::updateOutboxStatus));
     }
 
-    private void updateOutboxStatus(OutboxEvent outboxEvent, String status) {
+    private void updateOutboxStatus(OutboxEvent outboxEvent, OutboxStatus status) {
         OutboxEvent outboxEventUpdated = outboxEvent.withStatus(status);
         outboxEventRepository.save(outboxEventUpdated);
         logger.info("Outbox event status updated: {}", outboxEventUpdated);

@@ -1,6 +1,7 @@
 package br.com.jpmoraess.order.service.infrastructure.messaging;
 
 import br.com.jpmoraess.order.service.application.outbox.OutboxEvent;
+import br.com.jpmoraess.order.service.application.outbox.OutboxStatus;
 import br.com.jpmoraess.order.service.application.ports.output.publisher.OutboxEventPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +15,8 @@ public class OutboxEventSnsPublisher implements OutboxEventPublisher {
     private static final Logger logger = LoggerFactory.getLogger(OutboxEventSnsPublisher.class);
 
     @Override
-    public void publish(OutboxEvent outboxEvent, BiConsumer<OutboxEvent, String> callback) {
+    public void publish(OutboxEvent outboxEvent, BiConsumer<OutboxEvent, OutboxStatus> callback) {
         logger.info("Publishing outbox event to SNS: {}", outboxEvent);
-        callback.accept(outboxEvent, "COMPLETED");
+        callback.accept(outboxEvent, OutboxStatus.COMPLETED);
     }
 }

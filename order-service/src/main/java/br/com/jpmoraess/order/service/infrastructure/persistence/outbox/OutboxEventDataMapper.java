@@ -1,6 +1,7 @@
 package br.com.jpmoraess.order.service.infrastructure.persistence.outbox;
 
 import br.com.jpmoraess.order.service.application.outbox.OutboxEvent;
+import br.com.jpmoraess.order.service.application.outbox.OutboxStatus;
 
 public class OutboxEventDataMapper {
 
@@ -11,7 +12,7 @@ public class OutboxEventDataMapper {
                 outboxEvent.aggregateId(),
                 outboxEvent.eventType(),
                 outboxEvent.payload(),
-                outboxEvent.status()
+                outboxEvent.status().name()
         );
     }
 
@@ -22,7 +23,7 @@ public class OutboxEventDataMapper {
                 outboxEventEntity.getAggregateId(),
                 outboxEventEntity.getEventType(),
                 outboxEventEntity.getPayload(),
-                outboxEventEntity.getStatus()
+                OutboxStatus.valueOf(outboxEventEntity.getStatus())
         );
     }
 }

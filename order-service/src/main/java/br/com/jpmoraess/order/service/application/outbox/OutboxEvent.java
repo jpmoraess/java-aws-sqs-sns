@@ -8,14 +8,14 @@ public record OutboxEvent(
         String aggregateId,
         String eventType,
         String payload,
-        String status
+        OutboxStatus status
 ) {
 
     public static OutboxEvent create(String aggregateType, String aggregateId, String eventType, String payload) {
-        return new OutboxEvent(UUID.randomUUID(), aggregateType, aggregateId, eventType, payload, "STARTED");
+        return new OutboxEvent(UUID.randomUUID(), aggregateType, aggregateId, eventType, payload, OutboxStatus.STARTED);
     }
 
-    public OutboxEvent withStatus(String status) {
+    public OutboxEvent withStatus(OutboxStatus status) {
         return new OutboxEvent(id, aggregateType, aggregateId, eventType, payload, status);
     }
 }
