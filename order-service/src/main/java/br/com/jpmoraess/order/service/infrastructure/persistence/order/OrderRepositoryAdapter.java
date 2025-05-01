@@ -1,6 +1,6 @@
 package br.com.jpmoraess.order.service.infrastructure.persistence.order;
 
-import br.com.jpmoraess.order.service.application.repository.OrderRepository;
+import br.com.jpmoraess.order.service.application.ports.output.repository.OrderRepository;
 import br.com.jpmoraess.order.service.domain.entity.Order;
 import org.springframework.stereotype.Component;
 

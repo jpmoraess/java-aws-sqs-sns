@@ -12,7 +12,7 @@ public record OutboxEvent(
 ) {
 
     public static OutboxEvent create(String aggregateType, String aggregateId, String eventType, String payload) {
-        return new OutboxEvent(UUID.randomUUID(), aggregateType, aggregateId, eventType, payload, "PENDING");
+        return new OutboxEvent(UUID.randomUUID(), aggregateType, aggregateId, eventType, payload, "STARTED");
     }
 
     public OutboxEvent withStatus(String status) {

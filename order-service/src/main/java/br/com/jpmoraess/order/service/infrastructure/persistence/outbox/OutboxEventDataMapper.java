@@ -14,4 +14,15 @@ public class OutboxEventDataMapper {
                 outboxEvent.status()
         );
     }
+
+    public static OutboxEvent toEvent(OutboxEventEntity outboxEventEntity) {
+        return new OutboxEvent(
+                outboxEventEntity.getId(),
+                outboxEventEntity.getAggregateType(),
+                outboxEventEntity.getAggregateId(),
+                outboxEventEntity.getEventType(),
+                outboxEventEntity.getPayload(),
+                outboxEventEntity.getStatus()
+        );
+    }
 }

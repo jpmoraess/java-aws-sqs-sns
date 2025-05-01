@@ -1,8 +1,8 @@
 package br.com.jpmoraess.order.service.application.usecase;
 
 import br.com.jpmoraess.order.service.application.outbox.OutboxEvent;
-import br.com.jpmoraess.order.service.application.repository.OrderRepository;
-import br.com.jpmoraess.order.service.application.repository.OutboxEventRepository;
+import br.com.jpmoraess.order.service.application.ports.output.repository.OrderRepository;
+import br.com.jpmoraess.order.service.application.ports.output.repository.OutboxEventRepository;
 import br.com.jpmoraess.order.service.domain.entity.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
