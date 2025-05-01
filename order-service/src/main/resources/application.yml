@@ -19,5 +19,5 @@ spring:
           dialect: org.hibernate.dialect.PostgreSQLDialect
 
 outbox-scheduler:
-  fixed-delay: 5000
-  initial-delay: 5000
+  fixed-delay: 10000
+  initial-delay: 10000
